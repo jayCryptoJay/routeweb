@@ -151,8 +151,10 @@ function vitePluginManusDebugCollector(): Plugin {
 }
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const isGitHubPagesBuild = process.env.GITHUB_ACTIONS === "true";
 
 export default defineConfig({
+  base: isGitHubPagesBuild ? "/routeweb/" : "/",
   plugins,
   define: {
     'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(process.env.GOOGLE_MAPS_PLATFORM_KEY || '')

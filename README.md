@@ -23,3 +23,7 @@ Vercel uses the included `vercel.json` rewrite so home-screen launches and direc
 ## Validation
 
 The release has passed TypeScript checks, automated route tests, production build verification, and a browser workflow check confirming that marking a stop delivered advances the fixed sequence and persists after refresh.
+
+## GitHub Pages publishing
+
+The repository includes `.github/workflows/deploy-pages.yml`, which builds and deploys the app whenever `main` changes. If Pages has not been enabled for this repository yet, the repository owner must make a one-time choice in **GitHub → Settings → Pages → Build and deployment → Source: GitHub Actions**. The live app will then publish at `https://jaycryptojay.github.io/routeweb/` after the next workflow run.

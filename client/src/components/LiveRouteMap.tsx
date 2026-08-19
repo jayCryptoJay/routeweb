@@ -27,9 +27,9 @@ function RouteDisplay({ destination, onStatusChange }: { destination: any; onSta
 
     onStatusChange('locating');
 
-    const dest = destination.lat != null && destination.lng != null
+    const dest: string | google.maps.routes.Waypoint = destination.lat != null && destination.lng != null
       ? { location: { lat: destination.lat, lng: destination.lng } }
-      : { address: destination.address };
+      : destination.address;
 
     navigator.geolocation.getCurrentPosition(
       (position) => {

@@ -12,8 +12,7 @@ import {
   listDeliveryStops,
   updateCoordinates,
   updateDeliveryDetails,
-  updateDeliveryStatus,
-  optimizePendingStops
+  updateDeliveryStatus
 } from "./db";
 
 const idInput = z.object({ id: z.number().int().positive() });
@@ -171,16 +170,20 @@ Ensure it's a valid JSON array and nothing else. Do not use markdown blocks.`,
       isExactPin: input.isExactPin,
     })),
 
+    /**
+     * Delivery sequencing is supplied as a fixed newspaper route. This endpoint
+     * intentionally remains non-mutating for backwards-compatible clients.
+     */
     optimizeRoute: protectedProcedure.input(
       z.object({
         lat: z.number().optional(),
         lng: z.number().optional(),
-        routeId: z.string().optional()
-      })
-    ).mutation(async ({ input }) => {
-      await optimizePendingStops(input.lat, input.lng, input.routeId);
-      return { success: true };
-    }),
+        routeId: z.string().optional(),
+      }),
+    ).mutation(() => ({
+      success: false,
+      message: "Route order is locked to the published newspaper sequence.",
+    })),
 
     geocodeRoute: protectedProcedure.input(z.object({ routeId: z.string().optional() }).optional()).mutation(async ({ input }) => {
       const routeId = input?.routeId;

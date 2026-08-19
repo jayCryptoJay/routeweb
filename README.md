@@ -1,27 +1,25 @@
-# Route Optimizer Elite — Delivery App Source
+# RouteWeb Delivery
 
-This package contains only the delivery web application source for the Belleair Bluffs / Largo newspaper route. The CarPlay scaffold, generated build output, dependencies, logs, repository metadata, and temporary files are intentionally excluded.
+RouteWeb is a **local-first iPhone delivery companion** for the fixed Belleair Bluffs / Largo newspaper route. Its default release build opens directly without a platform login, preserves the published delivery order, hands each stop to Apple Maps or Google Maps, and saves delivery progress in the browser on the driver’s phone.
 
-## Included
+## Use on iPhone
 
-The package includes the React mobile-first frontend, Express/tRPC backend, Drizzle schema and migration files, 190-stop route data, server-side geocoding and directions procedures, speech/haptic/wake-lock utilities, and the iPhone Drive Mode workflow.
+Open the deployed URL in **Safari**, then choose **Share → Add to Home Screen**. Open the RouteWeb icon before a route, choose **Drive Mode**, use Apple Maps for turn-by-turn navigation, and mark each delivery only when safely parked or stopped.
 
-## Run locally
+The route includes **162 stops** in a locked sequence. Progress is saved only in the iPhone’s browser storage. It is retained after closing the app, but it is cleared if Safari website data is cleared or if the in-app **Reset this phone’s route progress** action is used.
 
-Install Node.js and pnpm, then run:
+## Release build
+
+The default scripts produce the standalone static app suitable for secure static hosting:
 
 ```bash
-pnpm install
-pnpm seed:route
-pnpm dev
+npm install --legacy-peer-deps
+npm run build
+npm run preview
 ```
 
-The app expects the platform environment variables used by the Manus full-stack template, including `DATABASE_URL`, OAuth values, and the built-in Maps proxy values. Do not commit secrets into the project.
+Vercel uses the included `vercel.json` rewrite so home-screen launches and direct links reach the app. The repository also retains the former full-stack development commands as `npm run dev:full` and `npm run build:full` for future backend work.
 
-## Google AI Studio integration
+## Validation
 
-Google AI Studio can help adapt the map layer or generate a Google Maps integration, but the backend should continue to keep geocoding and directions credentials server-side. Preserve the `delivery` and `mobile` tRPC procedures so status changes continue to update the same database route.
-
-## Route integrity
-
-The delivery sequence is locked at 190 stops. The database seed and UI always order stops by `sequenceNumber`; status updates change delivery state without reordering the route.
+The release has passed TypeScript checks, automated route tests, production build verification, and a browser workflow check confirming that marking a stop delivered advances the fixed sequence and persists after refresh.

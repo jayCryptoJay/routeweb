@@ -4,7 +4,7 @@ This package contains only the delivery web application source for the Belleair 
 
 ## Included
 
-The package includes the React mobile-first frontend, Express/tRPC backend, Drizzle schema and migration files, 190-stop route data, server-side geocoding and directions procedures, speech/haptic/wake-lock utilities, and the iPhone Drive Mode workflow.
+The package includes the React mobile-first frontend, Express/tRPC backend, Drizzle schema and migration files, 162-stop route data, server-side geocoding and directions procedures, speech/haptic/wake-lock utilities, and the iPhone Drive Mode workflow.
 
 ## Run locally
 
@@ -24,4 +24,4 @@ Google AI Studio can help adapt the map layer or generate a Google Maps integrat
 
 ## Route integrity
 
-The delivery sequence is locked at 190 stops. The database seed and UI always order stops by `sequenceNumber`; status updates change delivery state without reordering the route.
+The delivery sequence is locked at 162 stops. The database seed and UI always order stops by `sequenceNumber`; status updates change delivery state without reordering the route.

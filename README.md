@@ -1,29 +1,101 @@
-# RouteWeb Delivery
+# FibStein — Generative Creature Lab: Duel Rift
 
-RouteWeb is a **local-first iPhone delivery companion** for the fixed Belleair Bluffs / Largo newspaper route. Its default release build opens directly without a platform login, preserves the published delivery order, hands each stop to Apple Maps or Google Maps, and saves delivery progress in the browser on the driver’s phone.
+> **A competitive creature game powered by recoverable mathematics.**
 
-## Use on iPhone
+FibStein Duel Rift turns deterministic generative art into a playable loop: discover a mathematical lifeform, shape it with visual controls, mutate a descendant, lock the result, beat a declared target, and send the creature to a friend as a playable challenge.
 
-Open the deployed URL in **Safari**, then choose **Share → Add to Home Screen**. Open the RouteWeb icon before a route, choose **Drive Mode**, use Apple Maps for turn-by-turn navigation, and mark each delivery only when safely parked or stopped.
+The project is a React, TypeScript, Canvas 2D, Express, tRPC, and Drizzle application. It retains the deterministic GCL genome engine from earlier iterations while placing game ritual—not raw configuration—at the center of the experience.
 
-The route includes **162 stops** in a locked sequence. Progress is saved only in the iPhone’s browser storage. It is retained after closing the app, but it is cleared if Safari website data is cleared or if the in-app **Reset this phone’s route progress** action is used.
+## Core Gameplay
 
-## Release build
+`DISCOVER → CREATE → MUTATE → LOCK → BATTLE → SHARE → REMIX`
 
-The default scripts produce the standalone static app suitable for secure static hosting:
+The primary Rift presents one organism, a declared target, and three primary actions: **Mutate**, **Battle**, and **Challenge a Friend**. Beginner controls translate player intent into genome values, while the advanced Lab preserves direct access to serializable DNA parameters.
 
-```bash
-npm install --legacy-peer-deps
-npm run build
-npm run preview
+| Experience | What it does | State in this release |
+| --- | --- | --- |
+| Duel Rift | Full-screen generative creature arena with a declared target and command dock | Implemented |
+| Create | Player-language controls for Flow, Twist, Chaos, Gravity, Glow, and Density | Implemented |
+| Lab | Direct controls for recoverable, deterministic genome parameters | Implemented |
+| Mutation Duel | Timed 30-second practice duel against a transparent mathematical target | Implemented |
+| Genome score | Complexity, coherence, stability, controlled variation, and challenge-fit components | Implemented |
+| Archive and lineage | Local creature preservation, specimen previews, and visible ancestry | Implemented |
+| Challenge a Friend | Copyable direct-play payload plus vertical PNG challenge-card export | Implemented |
+| Personal records | Best score, unusualness, longest lineage, and evolution combo | Implemented |
+| Remote multiplayer and voting | Authenticated peer battles, community entries, and reactions | Data foundation exists; gameplay surface is intentionally not fabricated |
+
+## How the Game Stays Honest
+
+The creature genome is deterministic: the same compatible engine, seed, genome, and version recreate the same artifact. Mutation and crossover produce new serializable descendants rather than overwriting their source.
+
+The visible **Genome Score** uses the following deterministic weighting:
+
+| Component | Weight | Interpretation |
+| --- | ---: | --- |
+| Complexity | 30% | Frequency, warp, distortion, and turbulence contribution |
+| Coherence | 25% | Family-compatible structural stability |
+| Stability | 15% | Resistance to excessive volatility in the active field |
+| Controlled variation | 15% | Deliberate difference from the source distribution |
+| Challenge fit | 15% | Fitness for the declared practice-duel condition |
+
+Discovery class is separate from score and derives from parameter-distribution distance. The app does **not** manufacture opponent scores, community ranks, votes, reviews, or player activity. The first release uses an explicitly labelled practice target until authenticated multiplayer is activated.
+
+## Shareable Challenges
+
+The Challenge a Friend flow produces a portable payload with the starting DNA, declared target score, source specimen ID, and duel rule. It also exports a vertical share card that includes the creature preview, discovery class, generation, genome score, and challenge prompt.
+
+Recipients can open the payload and experience the shared creature before any account prompt. The source creature can be locked into the local archive to begin a remix lineage.
+
+## Project Structure
+
+```text
+client/
+  src/
+    components/CreatureCanvas.tsx    # Adaptive Canvas 2D renderer
+    lib/creatureEngine.ts            # Genome, DNA, scoring, challenge utilities
+    lib/creatureEngine.test.ts       # Deterministic engine tests
+    pages/Home.tsx                   # Duel Rift game experience
+    index.css                         # FibStein Duel Rift visual system
+server/
+  routers.ts                          # tRPC player and creature contracts
+  db.ts                               # Database helpers
+drizzle/
+  schema.ts                           # Player, creature, field-trial, submission models
+ux_architecture.md                    # 3.0 game-first UX architecture
+gcl3_validation.md                   # Manual cross-flow validation record
 ```
 
-Vercel uses the included `vercel.json` rewrite so home-screen launches and direct links reach the app. The repository also retains the former full-stack development commands as `npm run dev:full` and `npm run build:full` for future backend work.
+## Local Development
 
-## Validation
+### Prerequisites
 
-The release has passed TypeScript checks, automated route tests, production build verification, and a browser workflow check confirming that marking a stop delivered advances the fixed sequence and persists after refresh.
+Use Node.js 22+ and pnpm. The full-stack template provides the local development server, authentication scaffolding, and database configuration.
 
-## GitHub Pages publishing
+### Commands
 
-The repository includes `.github/workflows/deploy-pages.yml`, which builds and deploys the app whenever `main` changes. If Pages has not been enabled for this repository yet, the repository owner must make a one-time choice in **GitHub → Settings → Pages → Build and deployment → Source: GitHub Actions**. The live app will then publish at `https://jaycryptojay.github.io/routeweb/` after the next workflow run.
+```bash
+pnpm install
+pnpm dev
+```
+
+The local application runs through the project’s Express/Vite development entry point. The following verification commands are available:
+
+```bash
+pnpm check   # TypeScript validation
+pnpm test    # Vitest suite, including deterministic creature-engine tests
+pnpm build   # Production client and server build
+```
+
+## Validation Completed
+
+The current release was verified through deterministic tests, TypeScript checks, and a production build. Live interaction checks covered tutorial dismissal, creature mutation, practice-duel start and lock, near-miss and personal-score feedback, archive preservation, score-contract visibility, challenge-link copy, source locking, and vertical challenge-card export.
+
+## Current Boundaries and Next Steps
+
+The release prioritizes a polished single-player and shareable challenge loop. It intentionally keeps remote player-versus-player matching, public leaderboards, community voting, Genome Golf, Chaos Run, and Daily Specimen as future features rather than simulating activity that does not exist.
+
+Recommended next increments are authenticated friend challenge acceptance, cloud-hosted creature previews for shared archive cards, and short animated WebM challenge exports.
+
+## License
+
+Private project. All rights reserved unless the repository owner specifies otherwise.

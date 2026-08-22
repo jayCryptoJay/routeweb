@@ -19,20 +19,6 @@ export async function createContext(
     // Authentication is optional for public procedures.
     user = null;
   }
-  
-  if (!user) {
-    user = {
-      id: 1,
-      openId: "mock-user",
-      name: "Local Driver",
-      email: "driver@example.com",
-      loginMethod: "local",
-      role: "user",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      lastSignedIn: new Date()
-    } as unknown as User;
-  }
 
   return {
     req: opts.req,

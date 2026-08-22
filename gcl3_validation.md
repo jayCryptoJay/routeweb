@@ -1,0 +1,15 @@
+# Generative Creature Lab 3.0 — Game-Loop Validation Notes
+
+## Live browser checks
+
+- The first-run state rendered the game-first Rift under the optional five-step onboarding, with the full-screen organism, declared target, score contract, three primary game actions, beginner Create controls, and advanced Lab entry all present in the DOM.
+- The optional tutorial’s **Skip** control was invoked. The browser capture did not return a post-click screenshot, so the next live view will confirm the resulting playable state.
+- A subsequent live view confirmed that dismissal exposed the full playable Rift with the declared target, primary actions, and Create/Lab control levels. The first mutation click used a stale browser element map after the page had updated, so the next validation step will refresh the interaction map before clicking.
+- The transient browser reset was recovered by reopening the local server. The resulting live Rift visibly prioritized the magenta declared target, cyan player score, specimen evidence, full-scale mathematical lifeform, and thin three-action command dock.
+- **Mutate:** The main command dock created a new generation-one descendant, visibly changed the field, updated score/shortfall, and returned `MUTATION COMPLETE · New organism in the Rift.`
+- **Practice Duel:** The Battle action opened a side-by-side Mutation Duel with declared target score, 30-second timer, matched visual fields, and explicit text: `Same seed. Transparent score. No fake opponent.`
+- **Timed resolution:** The live timer entered a `FIELD OPEN` state and Lock produced a transparent near-miss result of `YOU 79.5 — TARGET 80.6`, with a clear “one more mutation” action. The first lock did expose a missing preview because the Rift canvas unmounted in the Duel view; the active arena canvas is now attached to the preview reference so automatic preservation can complete in the Duel context.
+- **Challenge card:** The Challenge a Friend action opened a vertical transmission card containing the live creature preview, specimen ID, discovery class, genome score, generation, target score, creature family, and `CAN YOU BEAT THIS?` invitation. Its actions expose a direct challenge link, vertical asset export, and source locking; the explainer accurately states that recipients experience the creature before any account prompt.
+- **Invitation actions:** The challenge link successfully copied with the confirmation `Your friend can play without signing in.` The Source Lock action then confirmed `SOURCE CREATURE LOCKED FOR REMIX`, preserving the share origin for ancestry rather than treating the card as a disposable export.
+- **Score contract:** The live Records view displayed the active genome’s deterministic component scores—Complexity 77, Coherence 73, Stability 64, Controlled Variation 87, and Challenge Fit 78—alongside the published 30% / 25% / 15% / 15% / 15% weighting. It also kept community voting explicitly separate from the personal score.
+- **Vertical export:** The live `EXPORT VERTICAL CARD` action produced the confirmation `VERTICAL CHALLENGE CARD EXPORTED.`, completing the active-creature-to-shareable-game-card flow.

@@ -1,9 +1,468 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "281ac960-ab5c-445e-b718-33d70f81f026",
+  "id": "a194919e-93aa-4ad4-9a40-6339b90f464f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "creatures": {
+      "name": "creatures",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(48)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creatorId": {
+          "name": "creatorId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "family": {
+          "name": "family",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "generatorVersion": {
+          "name": "generatorVersion",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "seed": {
+          "name": "seed",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "dna": {
+          "name": "dna",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "genomeJson": {
+          "name": "genomeJson",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scoreJson": {
+          "name": "scoreJson",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "rarity": {
+          "name": "rarity",
+          "type": "enum('common','uncommon','rare','extreme','anomalous','singular')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "rarityReason": {
+          "name": "rarityReason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "parentIdsJson": {
+          "name": "parentIdsJson",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "generation": {
+          "name": "generation",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "previewKey": {
+          "name": "previewKey",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "creatures_creator_idx": {
+          "name": "creatures_creator_idx",
+          "columns": [
+            "creatorId"
+          ],
+          "isUnique": false
+        },
+        "creatures_family_idx": {
+          "name": "creatures_family_idx",
+          "columns": [
+            "family"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "creatures_creatorId_users_id_fk": {
+          "name": "creatures_creatorId_users_id_fk",
+          "tableFrom": "creatures",
+          "tableTo": "users",
+          "columnsFrom": [
+            "creatorId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "creatures_id": {
+          "name": "creatures_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "field_trials": {
+      "name": "field_trials",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "trialDate": {
+          "name": "trialDate",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "constraintType": {
+          "name": "constraintType",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "constraintJson": {
+          "name": "constraintJson",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "baseSeed": {
+          "name": "baseSeed",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "field_trials_date_idx": {
+          "name": "field_trials_date_idx",
+          "columns": [
+            "trialDate"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "field_trials_id": {
+          "name": "field_trials_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "field_trials_trialDate_unique": {
+          "name": "field_trials_trialDate_unique",
+          "columns": [
+            "trialDate"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "player_profiles": {
+      "name": "player_profiles",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "handle": {
+          "name": "handle",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "xp": {
+          "name": "xp",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "level": {
+          "name": "level",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "discoveriesJson": {
+          "name": "discoveriesJson",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "specialty": {
+          "name": "specialty",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'Field Walker'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "player_profiles_user_idx": {
+          "name": "player_profiles_user_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "player_profiles_userId_users_id_fk": {
+          "name": "player_profiles_userId_users_id_fk",
+          "tableFrom": "player_profiles",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "player_profiles_id": {
+          "name": "player_profiles_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "player_profiles_userId_unique": {
+          "name": "player_profiles_userId_unique",
+          "columns": [
+            "userId"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "trial_submissions": {
+      "name": "trial_submissions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "trialId": {
+          "name": "trialId",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creatureId": {
+          "name": "creatureId",
+          "type": "varchar(48)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creatorId": {
+          "name": "creatorId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "submittedAt": {
+          "name": "submittedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "trial_submission_creature_unique": {
+          "name": "trial_submission_creature_unique",
+          "columns": [
+            "trialId",
+            "creatureId"
+          ],
+          "isUnique": true
+        },
+        "trial_submission_creator_idx": {
+          "name": "trial_submission_creator_idx",
+          "columns": [
+            "creatorId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "trial_submissions_trialId_field_trials_id_fk": {
+          "name": "trial_submissions_trialId_field_trials_id_fk",
+          "tableFrom": "trial_submissions",
+          "tableTo": "field_trials",
+          "columnsFrom": [
+            "trialId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "trial_submissions_creatureId_creatures_id_fk": {
+          "name": "trial_submissions_creatureId_creatures_id_fk",
+          "tableFrom": "trial_submissions",
+          "tableTo": "creatures",
+          "columnsFrom": [
+            "creatureId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "trial_submissions_creatorId_users_id_fk": {
+          "name": "trial_submissions_creatorId_users_id_fk",
+          "tableFrom": "trial_submissions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "creatorId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "trial_submissions_id": {
+          "name": "trial_submissions_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
     "users": {
       "name": "users",
       "columns": {
